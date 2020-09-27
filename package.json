@@ -1,0 +1,57 @@
+{
+	"name": "gatsby-source-serverless-aurora",
+	"version": "1.0.0",
+	"description": "Source plugin for pulling data into Gatsby from an AWS Aurora database running in Severless mode.",
+	"main": "dist/src/main.js",
+	"scripts": {
+		"__build": "./node_modules/.bin/tsc --outDir ./dist",
+		"lint": "./node_modules/.bin/tslint --project ./tsconfig.json",
+		"__prepare": "npm run build",
+		"test": "./node_modules/.bin/jest --watch",
+		"test:cov": "./node_modules/.bin/jest --coverage --verbose"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/saikojosh/gatsby-source-serverless-aurora.git"
+	},
+	"keywords": [
+		"gatsby",
+		"gatsby-plugin",
+		"gatsby-source",
+		"plugin",
+		"source",
+		"serverless",
+		"aurora",
+		"rds",
+		"mysql",
+		"postgres",
+		"postgresql",
+		"db",
+		"database"
+	],
+	"author": "Josh Cole <hello@joshuacole.me>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/saikojosh/gatsby-source-serverless-aurora/issues"
+	},
+	"homepage": "https://github.com/saikojosh/gatsby-source-serverless-aurora#readme",
+	"devDependencies": {
+		"@types/jest": "26.0.14",
+		"@types/node": "14.11.2",
+		"@types/pluralize": "0.0.29",
+		"gatsby": "^2.24.63",
+		"jest": "26.4.2",
+		"ts-jest": "26.4.0",
+		"tslint": "^6.1.3",
+		"typescript": "4.0.3"
+	},
+	"dependencies": {
+		"aurora-data-api": "1.0.0-alpha.3",
+		"pluralize": "8.0.0",
+		"tslib": "2.0.1"
+	},
+	"engines": {
+		"node": ">=12.18.0",
+		"npm": ">=6.14.0"
+	}
+}
