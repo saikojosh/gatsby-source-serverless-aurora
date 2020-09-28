@@ -22,7 +22,7 @@ function flattenQueryResultsToNodeList(
 
 	for (const { query, rows } of queryResults) {
 		const idFieldName = query.idFieldName || `id`;
-			const nodeType = `${NODE_TYPE}-${query.nodeName}`;
+		const nodeType = `${NODE_TYPE}-${query.nodeName}`;
 
 		for (const row of rows) {
 			nodeList.push({
@@ -58,8 +58,9 @@ function findParentNodes(
 	childNode: INodeDefinition,
 	nodeList: INodeDefinition[],
 ): INodeDefinition[] {
-	if (!parentNodeName) return [];
-	let parentNodes: INodeDefinition[] = nodeList.filter(node => node.query.nodeName === parentNodeName);
+	let parentNodes: INodeDefinition[] = parentNodeName
+		? nodeList.filter(node => node.query.nodeName === parentNodeName)
+		: nodeList;
 	if (parentMatcher) parentNodes = parentNodes.filter(parentNode => parentMatcher(childNode.row, parentNode.row));
 	return parentNodes;
 }
