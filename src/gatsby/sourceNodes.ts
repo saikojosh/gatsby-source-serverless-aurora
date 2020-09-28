@@ -2,20 +2,20 @@
  * @file Source Nodes.
  */
 
-import pkg from '../package.json';
+import pkg from '../../package.json';
 
 import Gatsby from 'gatsby';
 
-import { getDataApi, performQueries } from './database';
-import { ISourcePluginOptions } from './definitions';
-import { prepareNodes, createNodes } from './nodes';
+import { getDataApi, performQueries } from '../lib/database';
+import { ISourcePluginOptions } from '../lib/definitions';
+import { prepareNodes, createNodes } from '../lib/nodes';
 
 /**
  * Obtains the data for the nodes from a Serverless Aurora database.
  * @param sourceNodeArgs The Gatsby arguments passed to the source nodes function.
  * @param options The user defined options passed to the plugin.
  */
-export default async function sourceNodes(
+export async function sourceNodes(
 	sourceNodeArgs: Gatsby.SourceNodesArgs,
 	options: ISourcePluginOptions,
 ): Promise<void> {

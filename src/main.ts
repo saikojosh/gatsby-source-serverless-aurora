@@ -2,4 +2,6 @@
  * @file Main entry point.
  */
 
-export * from './definitions';
+export * from './lib/definitions';
+
+export { sourceNodes } from './gatsby/sourceNodes';

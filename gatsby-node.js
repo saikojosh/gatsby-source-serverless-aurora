@@ -1,1 +1,1 @@
-exports.sourceNodes = require(`./dist/src/sourceNodes`);
+exports.sourceNodes = require(`./dist/src/main`).sourceNodes;
