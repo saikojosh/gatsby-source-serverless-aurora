@@ -20,6 +20,9 @@ module.exports = {
 			resolve: `gatsby-source-serverless-aurora`,
 			options: {
 				connection: {
+					accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+					secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+					region: process.env.AWS_REGION,
 					resourceArn: process.env.AURORA_RESOURCE_ARN,
 					secretArn: process.env.AURORA_SECRET_ARN,
 					databaseName: process.env.AURORA_DB_NAME,
