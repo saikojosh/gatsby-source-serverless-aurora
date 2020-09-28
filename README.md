@@ -57,7 +57,7 @@ These are all the options you can pass to the plugin:
 | queries[].parentNodeName          |          |         | Optionally link nodes created by this query as children of node(s) created by another query. |
 | queries[].parentMatcher           |          |         | Optionally filter the parent nodes found with `parentNodeName`. See below for usage.         |
 | queries[].statement               | Required |         | The query to perform.                                                                        |
-| queries[].idFieldName             |          | `id`    | The column to use for the unique ID of the Gatsby nodes.                                     |
+| queries[].idFieldName             |          | `"id"`  | The column to use for the unique ID of the Gatsby nodes.                                     |
 | queries[].databaseName            |          |         | Optionally query a different database for this query only.                                   |
 
 ## Parent-Child Relationships
