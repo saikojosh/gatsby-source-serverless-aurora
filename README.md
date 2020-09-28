@@ -43,19 +43,22 @@ Re/start your development server: `gatsby develop`.
 
 These are all the options you can pass to the plugin:
 
-| Option                         | Required | Default | Description                                                                                  |
-| ------------------------------ | -------- | ------- | -------------------------------------------------------------------------------------------- |
-| connectionDetails.resourceArn  | Required |         | The Resource ARN for your Serverless Aurora instance.                                        |
-| connectionDetails.secretArn    | Required |         | The Secret ARN for your Serverless Aurora instance.                                          |
-| connectionDetails.databaseName | Required |         | The name of the database to use for queries. Can be overridden in each query.                |
-| queryBatchSize                 |          | `10`    | The maximum number of simultaneous queries to perform.                                       |
-| queries                        | Required |         | A list of queries to perform.                                                                |
-| queries[].nodeName             | Required |         | Gives a name to the nodes created by the query, e.g. "page".                                 |
-| queries[].parentNodeName       |          |         | Optionally link nodes created by this query as children of node(s) created by another query. |
-| queries[].parentMatcher        |          |         | Optionally filter the parent nodes found with `parentNodeName`. See below for usage.         |
-| queries[].statement            | Required |         | The query to perform.                                                                        |
-| queries[].idFieldName          |          | `id`    | The column to use for the unique ID of the Gatsby nodes.                                     |
-| queries[].databaseName         |          |         | Optionally query a different database for this query only.                                   |
+| Option                            | Required | Default | Description                                                                                  |
+| --------------------------------- | -------- | ------- | -------------------------------------------------------------------------------------------- |
+| connectionDetails.accessKeyId     | Required |         | An AWS access key ID.                                                                        |
+| connectionDetails.secretAccessKey | Required |         | An AWS secret access key.                                                                    |
+| connectionDetails.region          | Required |         | The region for your Serverless Aurora instance.                                              |
+| connectionDetails.resourceArn     | Required |         | The Resource ARN for your Serverless Aurora instance.                                        |
+| connectionDetails.secretArn       | Required |         | The Secret ARN for your Serverless Aurora instance.                                          |
+| connectionDetails.databaseName    | Required |         | The name of the database to use for queries. Can be overridden in each query.                |
+| queryBatchSize                    |          | `10`    | The maximum number of simultaneous queries to perform.                                       |
+| queries                           | Required |         | A list of queries to perform.                                                                |
+| queries[].nodeName                | Required |         | Gives a name to the nodes created by the query, e.g. "page".                                 |
+| queries[].parentNodeName          |          |         | Optionally link nodes created by this query as children of node(s) created by another query. |
+| queries[].parentMatcher           |          |         | Optionally filter the parent nodes found with `parentNodeName`. See below for usage.         |
+| queries[].statement               | Required |         | The query to perform.                                                                        |
+| queries[].idFieldName             |          | `id`    | The column to use for the unique ID of the Gatsby nodes.                                     |
+| queries[].databaseName            |          |         | Optionally query a different database for this query only.                                   |
 
 ## Parent-Child Relationships
 
