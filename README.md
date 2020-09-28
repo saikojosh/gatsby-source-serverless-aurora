@@ -55,7 +55,6 @@ These are all the options you can pass to the plugin:
 | connection.secretArn       | Required |         | The Secret ARN for your Serverless Aurora instance.                                          |
 | connection.databaseName    | Required |         | The name of the database to use for queries. Can be overridden in each query.                |
 | queryBatchSize             |          | `10`    | The maximum number of simultaneous queries to perform.                                       |
-| queries                    | Required |         | A list of queries to perform.                                                                |
 | queries[].nodeName         | Required |         | Gives a name to the nodes created by the query, e.g. "page".                                 |
 | queries[].parentNodeName   |          |         | Optionally link nodes created by this query as children of node(s) created by another query. |
 | queries[].parentMatcher    |          |         | Optionally filter the parent nodes found with `parentNodeName`. See below for usage.         |
