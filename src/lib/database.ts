@@ -30,9 +30,9 @@ export function getDataApi(connection: IConnectionDetails): AuroraDataAPI {
  * @param query The query to perform.
  */
 async function performQuery(dataApi: AuroraDataAPI, query: IQuery): Promise<IQueryResult> {
-	const opts: AuroraDataAPI.QueryOptions = {
-		database: query.databaseName,
-	};
+	const opts: AuroraDataAPI.QueryOptions = {};
+	if (query.databaseName) opts.database = query.databaseName;
+
 	const results = await dataApi.query<object>(query.statement, {}, opts);
 
 	return {
