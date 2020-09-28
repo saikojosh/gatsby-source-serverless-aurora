@@ -1,7 +1,7 @@
 {
 	"name": "gatsby-source-serverless-aurora",
 	"version": "1.0.0",
-	"description": "Source plugin for pulling data into Gatsby from an AWS Aurora database running in Severless mode.",
+	"description": "A Gatsby source plugin for pulling data into Gatsby at build time from an AWS Serverless Aurora database.",
 	"main": "dist/src/main.js",
 	"scripts": {
 		"build": "./node_modules/.bin/tsc --outDir ./dist",

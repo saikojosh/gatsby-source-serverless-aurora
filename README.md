@@ -1,3 +1,3 @@
 # gatsby-source-serverless-aurora
 
-Source plugin for pulling data into Gatsby from an AWS Aurora database running in Severless mode.
+A Gatsby source plugin for pulling data into Gatsby at build time from an AWS Serverless Aurora database.
