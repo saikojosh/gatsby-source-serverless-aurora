@@ -52,7 +52,7 @@ export interface IConnectionDetails {
  * Plugin options that can be specified by the consumer.
  */
 export interface ISourcePluginOptions extends Gatsby.PluginOptions {
-	connectionDetails: IConnectionDetails;
+	connection: IConnectionDetails;
 	queryBatchSize?: number;
 	queries: IQuery[];
 }

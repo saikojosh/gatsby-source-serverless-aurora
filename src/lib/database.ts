@@ -11,16 +11,16 @@ const DEFAULT_MAX_QUERY_BATCH_SIZE = 10;
 
 /**
  * Creates and returns a new data API instance for sending queries to a Serverless Aurora database.
- * @param connectionDetails The required details for the Aurora connection.
+ * @param connection The required details for the Aurora connection.
  */
-export function getDataApi(connectionDetails: IConnectionDetails): AuroraDataAPI {
+export function getDataApi(connection: IConnectionDetails): AuroraDataAPI {
 	return new AuroraDataAPI({
-		accessKeyId: connectionDetails.accessKeyId,
-		secretAccessKey: connectionDetails.secretAccessKey,
-		region: connectionDetails.region,
-		resourceArn: connectionDetails.resourceArn,
-		secretArn: connectionDetails.secretArn,
-		database: connectionDetails.databaseName,
+		accessKeyId: connection.accessKeyId,
+		secretAccessKey: connection.secretAccessKey,
+		region: connection.region,
+		resourceArn: connection.resourceArn,
+		secretArn: connection.secretArn,
+		database: connection.databaseName,
 	});
 }
 
