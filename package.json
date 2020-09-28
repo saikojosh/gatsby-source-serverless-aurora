@@ -4,9 +4,9 @@
 	"description": "Source plugin for pulling data into Gatsby from an AWS Aurora database running in Severless mode.",
 	"main": "dist/src/main.js",
 	"scripts": {
-		"__build": "./node_modules/.bin/tsc --outDir ./dist",
+		"build": "./node_modules/.bin/tsc --outDir ./dist",
 		"lint": "./node_modules/.bin/tslint --project ./tsconfig.json",
-		"__prepare": "npm run build",
+		"prepare": "npm run build",
 		"test": "./node_modules/.bin/jest --watch",
 		"test:cov": "./node_modules/.bin/jest --coverage --verbose"
 	},
