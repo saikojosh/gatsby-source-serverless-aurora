@@ -25,8 +25,7 @@ export default async function sourceNodes(
 		reporter.info(`Sourcing data from Serverless Aurora database`);
 
 		const { connectionDetails, queryBatchSize, queries } = options;
-		const { resourceArn, secretArn, databaseName } = connectionDetails;
-		const dataApi = getDataApi(resourceArn, secretArn, databaseName);
+		const dataApi = getDataApi(connectionDetails);
 		const queryResults = await performQueries(dataApi, queries, queryBatchSize);
 		const nodes = prepareNodes(sourceNodeArgs, queryResults);
 		createNodes(sourceNodeArgs, nodes);

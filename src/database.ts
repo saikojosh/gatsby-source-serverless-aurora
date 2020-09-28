@@ -4,22 +4,23 @@
 
 import { default as AuroraDataAPI } from 'aurora-data-api';
 
-import { IQuery, IQueryResult } from './definitions';
+import { IConnectionDetails, IQuery, IQueryResult } from './definitions';
 import { chunkArray } from './utilities';
 
 const DEFAULT_MAX_QUERY_BATCH_SIZE = 10;
 
 /**
  * Creates and returns a new data API instance for sending queries to a Serverless Aurora database.
- * @param resourceArn The AWS Resource ARN.
- * @param secretArn The AWS Secret ARN.
- * @param databaseName The name of the database to access.
+ * @param connectionDetails The required details for the Aurora connection.
  */
-export function getDataApi(resourceArn: string, secretArn: string, databaseName: string): AuroraDataAPI {
+export function getDataApi(connectionDetails: IConnectionDetails): AuroraDataAPI {
 	return new AuroraDataAPI({
-		resourceArn,
-		secretArn,
-		database: databaseName,
+		accessKeyId: connectionDetails.accessKeyId,
+		secretAccessKey: connectionDetails.secretAccessKey,
+		region: connectionDetails.region,
+		resourceArn: connectionDetails.resourceArn,
+		secretArn: connectionDetails.secretArn,
+		database: connectionDetails.databaseName,
 	});
 }
 

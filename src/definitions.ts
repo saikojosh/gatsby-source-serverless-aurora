@@ -37,14 +37,22 @@ export interface IQuery {
 }
 
 /**
+ * The required details for the Aurora connection.
+ */
+export interface IConnectionDetails {
+	accessKeyId: string;
+	secretAccessKey: string;
+	region: string;
+	resourceArn: string;
+	secretArn: string;
+	databaseName: string;
+}
+
+/**
  * Plugin options that can be specified by the consumer.
  */
 export interface ISourcePluginOptions extends Gatsby.PluginOptions {
-	connectionDetails: {
-		resourceArn: string;
-		secretArn: string;
-		databaseName: string;
-	};
+	connectionDetails: IConnectionDetails;
 	queryBatchSize?: number;
 	queries: IQuery[];
 }
