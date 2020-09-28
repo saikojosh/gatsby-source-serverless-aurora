@@ -22,7 +22,7 @@ export async function sourceNodes(
 	const { reporter } = sourceNodeArgs;
 
 	try {
-		reporter.info(`Sourcing data from Serverless Aurora database`);
+		reporter.info(`Sourcing data using "${pkg.name}" @ ${pkg.version}`);
 
 		const { connectionDetails, queryBatchSize, queries } = options;
 		const dataApi = getDataApi(connectionDetails);
@@ -30,7 +30,7 @@ export async function sourceNodes(
 		const nodes = prepareNodes(sourceNodeArgs, queryResults);
 		createNodes(sourceNodeArgs, nodes);
 
-		reporter.success(`Successfully sourced ${nodes.length} node(s) from Serverless Aurora database`);
+		reporter.success(`Successfully sourced ${nodes.length} node(s) using "${pkg.name}"`);
 	} catch (e) {
 		const err = e as NodeJS.ErrnoException;
 		reporter.error(`Error while sourcing data with "${pkg.name}"`, err);
