@@ -22,7 +22,7 @@ export interface IQueryResult {
 /**
  * A user defined predicate function to determine if the given row should be a child of the given parent row.
  */
-export type ParentMatcher = (row: IQueryResultRow, parentRow: IQueryResultRow) => boolean;
+export type ParentMatcher = (childRow: IQueryResultRow, parentRow: IQueryResultRow) => boolean;
 
 /**
  * A query definition. A database name can be optionally specified to query a different database than the default.
