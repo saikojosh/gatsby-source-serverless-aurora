@@ -21,13 +21,14 @@ function flattenQueryResultsToNodeList(
 	const nodeList: INodeDefinition[] = [];
 
 	for (const { query, rows } of queryResults) {
-		for (const row of rows) {
+		const idFieldName = query.idFieldName || `id`;
 			const nodeType = `${NODE_TYPE}-${query.nodeName}`;
 
+		for (const row of rows) {
 			nodeList.push({
 				data: {
 					...row,
-					id: createNodeId(`${nodeType}-${row[query.idFieldName]}`),
+					id: createNodeId(`${nodeType}-${row[idFieldName]}`),
 					links: { parents: {}, children: {} },
 					internal: {
 						type: nodeType,

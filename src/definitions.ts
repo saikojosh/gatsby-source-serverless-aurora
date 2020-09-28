@@ -32,7 +32,7 @@ export interface IQuery {
 	parentNodeName?: string;
 	parentMatcher?: ParentMatcher;
 	statement: string;
-	idFieldName: string;
+	idFieldName?: string;
 	databaseName?: string;
 }
 
