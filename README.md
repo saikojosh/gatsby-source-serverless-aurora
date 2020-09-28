@@ -10,7 +10,7 @@ Install the plugin:
 npm install --save-dev gatsby-source-serverless-aurora
 ```
 
-Add the plugin to `gatsby-config.js` with your Serverless Aurora connection details:
+Add the plugin to `gatsby-config.js` with your Serverless Aurora connection details and any queries you want to perform.
 
 ```js
 module.exports = {
