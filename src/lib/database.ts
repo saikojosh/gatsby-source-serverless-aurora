@@ -3,6 +3,7 @@
  */
 
 import { default as AuroraDataAPI } from 'aurora-data-api';
+import Gatsby from 'gatsby';
 
 import { IConnectionDetails, IQuery, IQueryResult } from './definitions';
 import { chunkArray } from './utilities';
@@ -43,15 +44,21 @@ async function performQuery(dataApi: AuroraDataAPI, query: IQuery): Promise<IQue
 
 /**
  * Performs all the given queries in batches.
+ * @param sourceNodeArgs The Gatsby arguments object passed to the source nodes function.
  * @param dataApi The data API to use when querying the database.
  * @param queries The list of queries to perform.
  * @param queryBatchSize The maximum number of queries to perform simultaneously.
  */
 export async function performQueries(
+	sourceNodeArgs: Gatsby.SourceNodesArgs,
 	dataApi: AuroraDataAPI,
 	queries: IQuery[],
 	queryBatchSize = DEFAULT_MAX_QUERY_BATCH_SIZE,
 ): Promise<IQueryResult[]> {
+	const { reporter } = sourceNodeArgs;
+
+	reporter.info(`Executing ${queries.length} queries`);
+
 	const batchedQueries = chunkArray(queries, queryBatchSize);
 	const output: IQueryResult[] = [];
 
