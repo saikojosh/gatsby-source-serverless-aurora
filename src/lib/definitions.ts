@@ -71,12 +71,20 @@ export interface INodeDefinition {
 				[key: string]: string[];
 			};
 		};
+		query: {
+			nodeName: string;
+			statement: string;
+			databaseName: string;
+		};
+		row: IQueryResultRow;
 		internal: {
 			type: string;
 			content: string;
 			contentDigest: string;
 		};
 	};
+	rawId: string;
+	nodeId: string;
 	query: IQuery;
 	row: IQueryResultRow;
 }

@@ -27,6 +27,7 @@ export async function sourceNodes(
 		const { connection, queryBatchSize, queries } = options;
 		const dataApi = getDataApi(connection);
 		const queryResults = await performQueries(sourceNodeArgs, dataApi, queries, queryBatchSize);
+		const nodes = prepareNodes(sourceNodeArgs, connection.databaseName, queryResults);
 		createNodes(sourceNodeArgs, nodes);
 
 		reporter.success(`Successfully sourced ${nodes.length} node(s) using "${pkg.name}"`);
