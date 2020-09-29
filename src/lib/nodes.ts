@@ -34,25 +34,23 @@ function flattenQueryResultsToNodeList(
 			const rawId = String(row[idFieldName]);
 
 			nodeList.push({
-				data: {
+				nodeData: {
 					id: rawId,
-					links: { parents: {}, children: {} },
-					query: {
-						nodeName: query.nodeName,
-						statement: query.statement,
-						databaseName: query.databaseName || defaultDatabaseName,
-					},
+					type: query.nodeName,
 					row,
+					links: { parents: {}, children: {} },
 					internal: {
 						type: nodeType,
 						content: JSON.stringify(row),
 						contentDigest: createContentDigest(row),
 					},
 				},
-				rawId,
-				nodeId: HELPERS.generateNodeId(query.nodeName, rawId),
-				query,
-				row,
+				metadata: {
+					rawId,
+					nodeId: HELPERS.generateNodeId(query.nodeName, rawId),
+					query,
+					row,
+				},
 			});
 		}
 	}
@@ -76,9 +74,13 @@ function findParentNodes(
 	if (!parentNodeName && !parentMatcher) return [];
 
 	let parentNodes: INodeDefinition[] = parentNodeName
-		? nodeList.filter(node => node.query.nodeName === parentNodeName)
+		? nodeList.filter(node => node.metadata.query.nodeName === parentNodeName)
 		: nodeList;
-	if (parentMatcher) parentNodes = parentNodes.filter(parentNode => parentMatcher(childNode.row, parentNode.row));
+
+	if (parentMatcher) {
+		parentNodes = parentNodes.filter(parentNode => parentMatcher(childNode.metadata.row, parentNode.metadata.row));
+	}
+
 	return parentNodes;
 }
 
@@ -88,7 +90,7 @@ function findParentNodes(
  */
 function addForignKeyRelationships(nodeList: INodeDefinition[]): void {
 	for (const childNode of nodeList) {
-		const { nodeName: childNodeName, parentNodeName, parentMatcher } = childNode.query;
+		const { nodeName: childNodeName, parentNodeName, parentMatcher } = childNode.metadata.query;
 		const parentNodes = findParentNodes(parentNodeName, parentMatcher, childNode, nodeList);
 
 		if (!parentNodes.length) continue;
@@ -97,16 +99,16 @@ function addForignKeyRelationships(nodeList: INodeDefinition[]): void {
 		const parentToChildKey = `${pluralize(childNodeName)}___NODE`;
 
 		parentNodes.forEach(parentNode => {
-			const childToParentKey = `${pluralize(parentNode.query.nodeName)}___NODE`;
-			childToParentLinks.push([childToParentKey, parentNode.nodeId]);
-			parentNode.data.links.children[parentToChildKey] = parentNode.data.links.children[parentToChildKey] ?? [];
-			parentNode.data.links.children[parentToChildKey].push(`${childNode.nodeId}`);
+			const childToParentKey = `${pluralize(parentNode.metadata.query.nodeName)}___NODE`;
+			childToParentLinks.push([childToParentKey, parentNode.metadata.nodeId]);
+			parentNode.nodeData.links.children[parentToChildKey] = parentNode.nodeData.links.children[parentToChildKey] ?? [];
+			parentNode.nodeData.links.children[parentToChildKey].push(`${childNode.metadata.nodeId}`);
 		});
 
 		childToParentLinks.forEach(childToParentLink => {
 			const [childToParentKey, parentNodeId] = childToParentLink;
-			childNode.data.links.parents[childToParentKey] = childNode.data.links.parents[childToParentKey] ?? [];
-			childNode.data.links.parents[childToParentKey].push(`${parentNodeId}`);
+			childNode.nodeData.links.parents[childToParentKey] = childNode.nodeData.links.parents[childToParentKey] ?? [];
+			childNode.nodeData.links.parents[childToParentKey].push(`${parentNodeId}`);
 		});
 	}
 }
@@ -138,8 +140,8 @@ export function createNodes(sourceNodeArgs: Gatsby.SourceNodesArgs, nodeList: IN
 	reporter.info(`Creating ${nodeList.length} node(s)`);
 
 	nodeList.forEach(node => {
-		const NodeFactory = HELPERS.createNodeFactory(node.query.nodeName);
-		const gatsbyNode = NodeFactory(node.data);
+		const NodeFactory = HELPERS.createNodeFactory(node.metadata.query.nodeName);
+		const gatsbyNode = NodeFactory(node.nodeData);
 		actions.createNode(gatsbyNode);
 	});
 }

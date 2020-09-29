@@ -61,8 +61,10 @@ export interface ISourcePluginOptions extends Gatsby.PluginOptions {
  * A definition for a Gatsby that includes additional metadata needed for constructing the nodes.
  */
 export interface INodeDefinition {
-	data: {
+	nodeData: {
 		id: string;
+		type: string;
+		row: IQueryResultRow;
 		links: {
 			parents: {
 				[key: string]: string[];
@@ -71,20 +73,16 @@ export interface INodeDefinition {
 				[key: string]: string[];
 			};
 		};
-		query: {
-			nodeName: string;
-			statement: string;
-			databaseName: string;
-		};
-		row: IQueryResultRow;
 		internal: {
 			type: string;
 			content: string;
 			contentDigest: string;
 		};
 	};
-	rawId: string;
-	nodeId: string;
-	query: IQuery;
-	row: IQueryResultRow;
+	metadata: {
+		rawId: string;
+		nodeId: string;
+		query: IQuery;
+		row: IQueryResultRow;
+	};
 }
